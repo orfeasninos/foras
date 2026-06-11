@@ -113,7 +113,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   width: 44px; height: 44px; border-radius: 13px;
   background: linear-gradient(135deg, var(--gold-lt) 0%, var(--gold) 55%, #c97b00 100%);
   display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 14px; letter-spacing: .5px; color: var(--navy);
+  color: var(--navy);
   box-shadow: 0 6px 20px rgba(245,158,11,.28);
   flex-shrink: 0; user-select: none;
 }
