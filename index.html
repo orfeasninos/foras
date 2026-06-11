@@ -528,8 +528,8 @@
               </div>
               <div class="field">
                 <label for="f-msg">Τι χρειάζεστε;</label>
-                <textarea id="f-msg" name="message" placeholder="Περιγράψτε τι χρειάζεστε — υλικά, ποσότητες, τοποθεσία έργου…"
-                  required></textarea>
+                <textarea id="f-msg" name="message"
+                  placeholder="Περιγράψτε τι χρειάζεστε — υλικά, ποσότητες, τοποθεσία έργου…" required></textarea>
               </div>
               <button id="submit-btn" type="submit" class="btn btn-primary btn-submit">
                 Αποστολή αιτήματος
@@ -537,6 +537,21 @@
               <p id="form-msg" style="display:none;" class="form-feedback"></p>
             </form>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section class="map-section">
+      <div class="map-lazy reveal" id="map-lazy">
+        <div class="map-placeholder" id="map-ph">
+          <svg class="map-pin-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p class="map-address">Αδάμας, Μήλος 848 01</p>
+          <button class="btn btn-outline map-load-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Εμφάνιση χάρτη
+          </button>
+          <p class="map-note">Η Google ενδέχεται να ορίσει cookies κατά τη φόρτωση</p>
         </div>
       </div>
     </section>
@@ -550,11 +565,11 @@
         <div class="footer-brand">
           <div class="logo-mark logo-sm">
             <svg width="18" height="13" viewBox="0 0 22 16" fill="currentColor" aria-hidden="true">
-              <rect x="0" y="0" width="10" height="7" rx="1.2"/>
-              <rect x="12" y="0" width="10" height="7" rx="1.2"/>
-              <rect x="0" y="9" width="4" height="7" rx="1.2"/>
-              <rect x="6" y="9" width="10" height="7" rx="1.2"/>
-              <rect x="18" y="9" width="4" height="7" rx="1.2"/>
+              <rect x="0" y="0" width="10" height="7" rx="1.2" />
+              <rect x="12" y="0" width="10" height="7" rx="1.2" />
+              <rect x="0" y="9" width="4" height="7" rx="1.2" />
+              <rect x="6" y="9" width="10" height="7" rx="1.2" />
+              <rect x="18" y="9" width="4" height="7" rx="1.2" />
             </svg>
           </div>
           <div>
@@ -562,7 +577,8 @@
             <div class="footer-tagline">Μήλος, Κυκλάδες</div>
           </div>
         </div>
-        <p class="footer-bio">Οικοδομικά υλικά για κάθε εργοτάξιο στη Μήλο —<br>αδρανή, τσιμέντα, σίδερα, τούβλα και μονωτικά.</p>
+        <p class="footer-bio">Οικοδομικά υλικά για κάθε εργοτάξιο στη Μήλο —<br>αδρανή, τσιμέντα, σίδερα, τούβλα και
+          μονωτικά.</p>
         <div class="footer-meta">
           <span>Αδάμας, Μήλος</span>
           <span class="footer-dot">·</span>
@@ -598,6 +614,12 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Map lazy-load
+    document.getElementById('map-ph').addEventListener('click', () => {
+      document.getElementById('map-lazy').innerHTML =
+        '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36181.06823630133!2d24.467085099999125!3d36.7229253836027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1498dfff2c572487%3A0x755e747640fab99!2zzpLOl86nzp_OoyDOmc6pzpHOnc6dzpfOoyAmIM6jzpnOkSDOny7OlSAtIM6Uzp_OnM6ZzprOkSDOpc6bzpnOms6RIM6czpfOm86fzqM!5e0!3m2!1sel!2sgr!4v1781211659114!5m2!1sel!2sgr" width="100%" height="100%" style="border:0;display:block;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+    });
 
     // Mobile menu
     const hamburger = document.getElementById('hamburger');
