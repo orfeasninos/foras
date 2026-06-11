@@ -405,9 +405,7 @@
           </div>
 
           <div class="form-card reveal reveal-delay">
-            <form id="contact-form" action="https://formsubmit.co/orfeasninos5@gmail.com" method="POST">
-              <input type="hidden" name="_subject" value="Νέο μήνυμα από foras.gr">
-              <input type="hidden" name="_captcha" value="false">
+<form id="contact-form">
 
               <div class="form-row">
                 <div class="field">
@@ -420,8 +418,8 @@
                 </div>
               </div>
               <div class="field">
-                <label for="f-email">Email <span class="opt">(προαιρετικό)</span></label>
-                <input id="f-email" type="email" name="email" placeholder="example@email.com" autocomplete="email">
+                <label for="f-email">Email</label>
+                <input id="f-email" type="email" name="email" placeholder="example@email.com" autocomplete="email" required>
               </div>
               <div class="field">
                 <label for="f-msg">Τι χρειάζεστε;</label>
@@ -564,30 +562,39 @@
     document.querySelectorAll('.stat-num[data-count]').forEach(el => statsObs.observe(el));
 
     // Contact form
+    // Αντικατέστησε με το URL του Apps Script σου μετά το deploy
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhyzAN0VW0YkHUph0L9Q_Wx51mmkOaSqk1RryrDbx0o_WKDC8_5Zk7ISkc3gT5AvpypQ/exec';
+
     const form = document.getElementById('contact-form');
     const fmsg = document.getElementById('form-msg');
     const sbtn = document.getElementById('submit-btn');
     const origText = sbtn.textContent;
 
-    form.addEventListener('submit', async e => {
+    form.addEventListener('submit', e => {
       e.preventDefault();
+
+      const fd = new FormData(form);
+      const params = new URLSearchParams({
+        name:    fd.get('name')    || '',
+        phone:   fd.get('phone')   || '',
+        email:   fd.get('email')   || '',
+        message: fd.get('message') || ''
+      });
+
       sbtn.disabled = true;
       sbtn.textContent = 'Αποστολή…';
       fmsg.style.display = 'none';
-      try {
-        const r = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-        if (!r.ok) throw 0;
-        fmsg.className = 'form-feedback ok';
-        fmsg.textContent = 'Το μήνυμα στάλθηκε! Θα επικοινωνήσουμε σύντομα.';
-        form.reset();
-      } catch {
-        fmsg.className = 'form-feedback err';
-        fmsg.textContent = 'Κάτι πήγε λάθος. Δοκιμάστε ξανά ή καλέστε μας.';
-      } finally {
-        sbtn.disabled = false;
-        sbtn.textContent = origText;
-        fmsg.style.display = 'block';
-      }
+
+      fetch(SCRIPT_URL + '?' + params.toString(), { mode: 'no-cors' })
+        .catch(() => {})
+        .finally(() => {
+          fmsg.className = 'form-feedback ok';
+          fmsg.textContent = 'Το μήνυμα στάλθηκε! Θα επικοινωνήσουμε σύντομα.';
+          fmsg.style.display = 'block';
+          sbtn.disabled = false;
+          sbtn.textContent = origText;
+          form.reset();
+        });
     });
   </script>
 </body>
